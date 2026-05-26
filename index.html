@@ -135,6 +135,15 @@
     .footer-name{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(4rem,11vw,10rem);text-transform:uppercase;color:transparent;-webkit-text-stroke:1px #2a0000;margin-top:50px;line-height:1;user-select:none;overflow:hidden;}
     .footer-copy{font-size:0.72rem;color:#333;margin-top:20px;padding-bottom:40px;display:flex;justify-content:space-between;align-items:center;}
 
+    /* GALLERY */
+    .gallery-grid-s{display:grid;grid-template-columns:1.6fr 1fr 1fr;grid-template-rows:210px 210px;gap:6px;}
+    .gallery-span{grid-row:1/3;border-radius:4px;overflow:hidden;}
+    .gallery-item{border-radius:4px;overflow:hidden;}
+    .gallery-item img,.gallery-span img{width:100%;height:100%;object-fit:cover;display:block;}
+    .gallery-stat{border-radius:4px;background:#0d0d0d;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;text-align:center;padding:16px;}
+    .gallery-grid-n{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;height:210px;}
+    .gallery-grid-n .gallery-item{height:100%;}
+
     /* RESPONSIVE */
     @media(max-width:960px){
       .wrap{padding:0 24px;}
@@ -147,10 +156,17 @@
       .exp-grid,.proj-grid,.hack-grid{grid-template-columns:1fr;}
       .stats-row{gap:40px;flex-wrap:wrap;}
       .footer-name{font-size:3.5rem;}
+      .gallery-grid-s{grid-template-columns:1fr 1fr;grid-template-rows:190px 190px;}
+      .gallery-span{grid-row:auto;height:190px;}
+      .gallery-grid-n{grid-template-columns:1fr 1fr;height:auto;}
+      .gallery-grid-n .gallery-item{height:160px;}
     }
     @media(max-width:600px){
       .proj-grid{grid-template-columns:1fr;}
       .footer-social{flex-wrap:wrap;gap:24px;}
+      .gallery-grid-s{grid-template-columns:1fr;grid-template-rows:auto;}
+      .gallery-grid-s .gallery-span,.gallery-grid-s .gallery-item,.gallery-grid-s .gallery-stat{height:200px;}
+      .gallery-grid-n{grid-template-columns:1fr 1fr;}
     }
 
     /* CURSOR */
@@ -255,7 +271,7 @@
 </div>
 
 <!-- TOOLS -->
-<div class="wrap">
+<div class="wrap" id="tools">
   <div class="label">SECURITY STACK</div>
   <div class="heading"><span class="w">Secured with the</span><span class="r">right tools</span></div>
   <p style="color:var(--gray);font-size:0.88rem;margin-top:14px;max-width:420px;">I work across web application security, network security, cloud, endpoint, and AI threat landscapes.</p>
@@ -351,6 +367,7 @@
 <!-- PROJECTS -->
 <div class="wrap">
   <section id="projects">
+    <div class="label">PROJECTS & REPORTS</div>
     <div class="heading"><span class="w">Things I've</span><span class="r">secured</span></div>
     <div class="proj-grid">
 
@@ -675,10 +692,10 @@
     <div class="hack-grid">
 
       <div class="hack-card">
-        <div class="hack-badge">🏆 TOP RANKING</div>
+        <div class="hack-badge">🏆 9TH PLACE · TOP 10</div>
         <div class="hack-title">Squad Hackathon 3.0</div>
-        <div class="hack-org">GTCO · GTBank · Nigeria</div>
-        <div class="hack-desc">Competed among 1,600+ teams across security, DevOps, cloud, frontend, backend, and product domains. Reached top rankings with strong performance across multiple rounds — including security, TypeScript, React, and Python coding challenges. Considered for GTCO internship opportunities.</div>
+        <div class="hack-org">GTCO · GTBank · Nigeria · Team: Modifiers</div>
+        <div class="hack-desc">Competed among 1,600+ teams. Finished 9th place overall — representing Team Modifiers across security, TypeScript, React, and Python coding challenges. Recognised in the Final 10 and considered for GTCO internship opportunities.</div>
       </div>
 
       <div class="hack-card">
@@ -902,12 +919,12 @@
     <!-- Squad Hackathon 3.0 -->
     <div style="margin-top:50px;">
       <div style="font-size:0.68rem;letter-spacing:3px;color:var(--gray);text-transform:uppercase;margin-bottom:14px;border-left:2px solid var(--red);padding-left:12px;">Squad Hackathon 3.0 &nbsp;·&nbsp; Team Modifiers &nbsp;·&nbsp; Top 9 of 1,600+ Teams &nbsp;·&nbsp; GTCO</div>
-      <div style="display:grid;grid-template-columns:1.6fr 1fr 1fr;grid-template-rows:210px 210px;gap:6px;">
-        <div style="grid-row:1/3;border-radius:4px;overflow:hidden;"><img src="ev-squad-all.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Squad Hackathon all teams"></div>
-        <div style="border-radius:4px;overflow:hidden;"><img src="ev-squad-team.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Team Modifiers"></div>
-        <div style="border-radius:4px;overflow:hidden;"><img src="ev-squad-board.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Live leaderboard"></div>
-        <div style="border-radius:4px;overflow:hidden;"><img src="ev-squad-rasaq.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" alt="At the venue"></div>
-        <div style="border-radius:4px;overflow:hidden;background:#0d0d0d;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;text-align:center;padding:16px;">
+      <div class="gallery-grid-s">
+        <div class="gallery-span"><img src="ev-squad-all.jpg" alt="Squad Hackathon all teams"></div>
+        <div class="gallery-item"><img src="ev-squad-team.jpg" alt="Team Modifiers"></div>
+        <div class="gallery-item"><img src="ev-squad-board.jpg" alt="Live leaderboard"></div>
+        <div class="gallery-item"><img src="ev-squad-rasaq.jpg" alt="At the venue"></div>
+        <div class="gallery-stat">
           <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:3.8rem;color:var(--red);line-height:1;">9th</div>
           <div style="font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--gray);">Final Position</div>
           <div style="font-size:0.6rem;letter-spacing:1px;color:#444;margin-top:4px;">1,600+ teams</div>
@@ -918,11 +935,11 @@
     <!-- NITHub Mentoring -->
     <div style="margin-top:20px;">
       <div style="font-size:0.68rem;letter-spacing:3px;color:var(--gray);text-transform:uppercase;margin-bottom:14px;border-left:2px solid var(--red);padding-left:12px;">NITHub UNILAG &nbsp;·&nbsp; Cybersecurity Cohort Mentor &nbsp;·&nbsp; ISC² CC + Cisco Fundamentals</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;height:210px;">
-        <div style="border-radius:4px;overflow:hidden;"><img src="ev-nithub-group.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" alt="NITHub group photo"></div>
-        <div style="border-radius:4px;overflow:hidden;"><img src="ev-nithub-class.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Classroom session"></div>
-        <div style="border-radius:4px;overflow:hidden;"><img src="ev-nithub-class2.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Full classroom"></div>
-        <div style="border-radius:4px;overflow:hidden;"><img src="ev-nithub-team.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" alt="NITHub team"></div>
+      <div class="gallery-grid-n">
+        <div class="gallery-item"><img src="ev-nithub-group.jpg" alt="NITHub group photo"></div>
+        <div class="gallery-item"><img src="ev-nithub-class.jpg" alt="Classroom session"></div>
+        <div class="gallery-item"><img src="ev-nithub-class2.jpg" alt="Full classroom"></div>
+        <div class="gallery-item"><img src="ev-nithub-team.jpg" alt="NITHub team"></div>
       </div>
     </div>
   </section>
@@ -992,18 +1009,37 @@
 </div><!-- end researcher-view -->
 
 <script>
-  document.querySelectorAll('a[href^="#"]').forEach(a=>{
-    a.addEventListener('click',e=>{e.preventDefault();document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});});
-  });
-
   const pentesterView = document.getElementById('pentester-view');
   const researcherView = document.getElementById('researcher-view');
+
+  function switchToPentester(){
+    researcherView.style.display = 'none';
+    pentesterView.style.display = 'block';
+    document.querySelectorAll('.nav-tab').forEach(t=>{t.classList.remove('active');t.classList.add('inactive');});
+    document.querySelector('.nav-tab').classList.add('active');
+    document.querySelector('.nav-tab').classList.remove('inactive');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  /* logo always switches back to pentester view */
+  document.querySelector('.nav-logo').addEventListener('click',function(e){
+    e.preventDefault();
+    switchToPentester();
+  });
+
+  /* smooth scroll only within visible view */
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    if(a.classList.contains('nav-logo')) return;
+    a.addEventListener('click',e=>{
+      const target = document.querySelector(a.getAttribute('href'));
+      if(target) { e.preventDefault(); target.scrollIntoView({behavior:'smooth'}); }
+    });
+  });
 
   document.querySelectorAll('.nav-tab').forEach(tab=>{
     tab.addEventListener('click',function(){
       document.querySelectorAll('.nav-tab').forEach(t=>{t.classList.remove('active');t.classList.add('inactive');});
       this.classList.add('active');this.classList.remove('inactive');
-
       if(this.textContent.trim() === 'RESEARCHER'){
         pentesterView.style.display = 'none';
         researcherView.style.display = 'block';
@@ -1017,4 +1053,5 @@
   });
 </script>
 </body>
+</html>
 </html>
