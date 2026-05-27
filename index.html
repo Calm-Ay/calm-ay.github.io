@@ -147,9 +147,12 @@
     /* RESPONSIVE */
     @media(max-width:960px){
       .wrap{padding:0 24px;}
-      nav{padding:16px 24px;}
-      .nav-center{display:none;}
-      #hero{flex-direction:column;padding-top:100px;}
+      nav{padding:12px 24px;flex-wrap:wrap;gap:0;}
+      .nav-logo{order:1;}
+      .nav-icons{order:2;}
+      .nav-center{display:flex;order:3;width:100%;margin-top:10px;justify-content:center;border-radius:30px;}
+      .nav-tab{flex:1;text-align:center;}
+      #hero{flex-direction:column;padding-top:110px;}
       .hero-photo{width:100%;max-width:280px;margin:0 auto;}
       #about{flex-direction:column;}
       .about-photos{width:100%;}
