@@ -170,6 +170,7 @@
       .gallery-grid-s{grid-template-columns:1fr;grid-template-rows:auto;}
       .gallery-grid-s .gallery-span,.gallery-grid-s .gallery-item,.gallery-grid-s .gallery-stat{height:200px;}
       .gallery-grid-n{grid-template-columns:1fr 1fr;}
+      .contact-grid{grid-template-columns:1fr!important;}
     }
 
     /* CURSOR */
@@ -982,12 +983,12 @@
     <div class="heading"><span class="w">Let's hack</span><span class="r">together.</span></div>
     <p class="contact-sub">Open to internships, security research collaborations, mentorship, bug bounty teams, and cybersecurity conversations. Drop a message.</p>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:50px;">
-      <form onsubmit="return false;" style="display:flex;flex-direction:column;gap:14px;">
-        <input type="text" placeholder="Your name" style="background:#0d0d0d;border:1px solid var(--border);border-radius:4px;padding:14px 16px;color:var(--white);font-family:'Space Grotesk',sans-serif;font-size:0.88rem;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--border)'"/>
-        <input type="email" placeholder="Your email" style="background:#0d0d0d;border:1px solid var(--border);border-radius:4px;padding:14px 16px;color:var(--white);font-family:'Space Grotesk',sans-serif;font-size:0.88rem;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--border)'"/>
-        <textarea placeholder="What's on your mind?" rows="5" style="background:#0d0d0d;border:1px solid var(--border);border-radius:4px;padding:14px 16px;color:var(--white);font-family:'Space Grotesk',sans-serif;font-size:0.88rem;outline:none;resize:vertical;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--border)'"></textarea>
-        <a href="mailto:ayomiderasq6@gmail.com" class="btn-r" style="text-align:center;margin-top:4px;">Send Message ↗</a>
+    <div class="contact-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:50px;">
+      <form id="contact-form" onsubmit="sendContactMessage(event);" style="display:flex;flex-direction:column;gap:14px;">
+        <input id="c-name" type="text" placeholder="Your name" style="background:#0d0d0d;border:1px solid var(--border);border-radius:4px;padding:14px 16px;color:var(--white);font-family:'Space Grotesk',sans-serif;font-size:0.88rem;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--border)'"/>
+        <input id="c-email" type="email" placeholder="Your email" style="background:#0d0d0d;border:1px solid var(--border);border-radius:4px;padding:14px 16px;color:var(--white);font-family:'Space Grotesk',sans-serif;font-size:0.88rem;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--border)'"/>
+        <textarea id="c-msg" placeholder="What's on your mind?" rows="5" style="background:#0d0d0d;border:1px solid var(--border);border-radius:4px;padding:14px 16px;color:var(--white);font-family:'Space Grotesk',sans-serif;font-size:0.88rem;outline:none;resize:vertical;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+        <button type="submit" class="btn-r" style="text-align:center;margin-top:4px;border:none;cursor:pointer;width:100%;font-family:'Space Grotesk',sans-serif;">Send Message ↗</button>
       </form>
 
       <div style="display:flex;flex-direction:column;gap:14px;">
@@ -1054,7 +1055,16 @@
       }
     });
   });
+
+  function sendContactMessage(e) {
+    e.preventDefault();
+    const name = document.getElementById('c-name').value.trim();
+    const email = document.getElementById('c-email').value.trim();
+    const msg = document.getElementById('c-msg').value.trim();
+    const subject = encodeURIComponent('Portfolio Message' + (name ? ' from ' + name : ''));
+    const body = encodeURIComponent((msg || '') + (email ? '\n\nReply to: ' + email : ''));
+    window.location.href = 'mailto:ayomiderasq6@gmail.com?subject=' + subject + '&body=' + body;
+  }
 </script>
 </body>
-</html>
 </html>
