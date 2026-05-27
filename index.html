@@ -149,14 +149,16 @@
       .wrap{padding:0 24px;}
       nav{padding:12px 24px;flex-wrap:wrap;gap:0;}
       .nav-logo{order:1;}
-      .nav-icons{order:2;}
+      .nav-icons{order:2;gap:14px;}
       .nav-center{display:flex;order:3;width:100%;margin-top:10px;justify-content:center;border-radius:30px;}
       .nav-tab{flex:1;text-align:center;}
       #hero{flex-direction:column;padding-top:110px;}
+      #r-hero{padding-top:110px!important;}
       .hero-photo{width:100%;max-width:280px;margin:0 auto;}
       #about{flex-direction:column;}
       .about-photos{width:100%;}
-      .exp-grid,.proj-grid,.hack-grid{grid-template-columns:1fr;}
+      .exp-grid,.proj-grid,.hack-grid{grid-template-columns:1fr!important;}
+      .r-grid{grid-template-columns:1fr!important;}
       .stats-row{gap:40px;flex-wrap:wrap;}
       .footer-name{font-size:3.5rem;}
       .gallery-grid-s{grid-template-columns:1fr 1fr;grid-template-rows:190px 190px;}
@@ -171,6 +173,7 @@
       .gallery-grid-s .gallery-span,.gallery-grid-s .gallery-item,.gallery-grid-s .gallery-stat{height:200px;}
       .gallery-grid-n{grid-template-columns:1fr 1fr;}
       .contact-grid{grid-template-columns:1fr!important;}
+      .nav-icons{gap:12px;}
     }
 
     /* CURSOR */
@@ -493,7 +496,7 @@
     <!-- OFFICIAL CERTIFICATIONS -->
     <div style="margin-top:50px;">
       <div style="font-size:0.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--gray);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border);">OFFICIAL CERTIFICATIONS</div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+      <div class="r-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
 
         <div class="project-card">
           <div class="proj-thumb" style="background:#050010;">
@@ -573,7 +576,7 @@
     <!-- TRAINING & COURSES -->
     <div style="margin-top:50px;">
       <div style="font-size:0.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--gray);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border);">TRAINING COURSES & LEARNING PATHS</div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+      <div class="r-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
 
         <div class="project-card">
           <div class="proj-thumb" style="background:#000d0a;">
@@ -787,7 +790,7 @@
     <div class="label">SPEAKING & EVENTS</div>
     <div class="heading"><span class="w">On the</span><span class="r">stage</span></div>
 
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:50px;">
+    <div class="r-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:50px;">
 
       <div style="background:var(--card);border:1px solid var(--border);border-radius:4px;padding:24px;position:relative;">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;">
@@ -860,7 +863,7 @@
     <div class="heading"><span class="w">Growing the</span><span class="r">ecosystem</span></div>
     <p style="color:var(--gray);font-size:0.9rem;margin-top:16px;max-width:520px;line-height:1.75;">I believe security knowledge is most powerful when it's shared. Every person I help understand cybersecurity becomes someone who protects others.</p>
 
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:50px;">
+    <div class="r-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:50px;">
 
       <div style="background:var(--card);border:1px solid var(--border);border-radius:4px;padding:24px;">
         <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:18px;">
