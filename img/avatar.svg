@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 300" fill="none" role="img" aria-label="illustrated avatar">
+  <defs>
+    <style>
+      .l{stroke:#e9f3ef;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;fill:none}
+      .f{fill:#0d1418}
+      .hair{fill:#0d1418;stroke:#e9f3ef;stroke-width:5;stroke-linejoin:round}
+      .sk{fill:#12242a}
+      .ac{stroke:#00d4aa;stroke-width:4;fill:none;stroke-linecap:round}
+    </style>
+  </defs>
+  <!-- shoulders / hoodie -->
+  <path class="l" d="M40 300 V262 C40 226 74 210 130 210 C186 210 220 226 220 262 V300"/>
+  <path class="f" d="M40 300 V262 C40 226 74 210 130 210 C186 210 220 226 220 262 V300 Z"/>
+  <path class="l" d="M40 300 V262 C40 226 74 210 130 210 C186 210 220 226 220 262 V300"/>
+  <!-- hood collar -->
+  <path class="l" d="M96 214 C110 236 150 236 164 214"/>
+  <path class="l" d="M130 224 V250"/>
+  <!-- neck -->
+  <path class="sk" d="M112 196 h36 v20 h-36 z"/>
+  <path class="l" d="M112 198 V214 M148 198 V214"/>
+  <!-- head -->
+  <ellipse class="sk" cx="130" cy="135" rx="62" ry="66"/>
+  <ellipse class="l" cx="130" cy="135" rx="62" ry="66"/>
+  <!-- ears -->
+  <path class="l" d="M68 135 c-10 0 -12 20 2 20"/>
+  <path class="l" d="M192 135 c10 0 12 20 -2 20"/>
+  <!-- afro / curly hair -->
+  <path class="hair" d="M70 96
+    C54 92 52 66 72 60
+    C70 40 96 30 114 42
+    C126 26 156 28 166 46
+    C192 42 204 66 188 82
+    C206 92 200 118 182 116
+    C186 100 180 86 168 84
+    C150 78 110 78 92 84
+    C80 88 74 100 78 116
+    C60 118 56 100 70 96 Z"/>
+  <!-- glasses -->
+  <circle class="l" cx="104" cy="140" r="24"/>
+  <circle class="l" cx="156" cy="140" r="24"/>
+  <path class="l" d="M128 140 h4"/>
+  <path class="l" d="M80 134 l-14 -6 M180 134 l14 -6"/>
+  <!-- glare on lenses -->
+  <path class="ac" d="M96 132 l10 -8 M148 132 l10 -8"/>
+  <!-- nose + smile -->
+  <path class="l" d="M130 150 v14 c0 4 -6 6 -8 4"/>
+  <path class="l" d="M112 178 c10 10 26 10 36 0"/>
+  <!-- eyebrows -->
+  <path class="l" d="M88 112 c8 -6 20 -6 28 -1 M132 111 c8 -5 20 -5 28 1"/>
+</svg>
