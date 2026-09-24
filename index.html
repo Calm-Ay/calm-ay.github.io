@@ -11,7 +11,12 @@
 <meta property="og:description" content="Penetration tester and security researcher focused on turning attack paths into clear, actionable evidence." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://calm-ay.github.io/" />
-<meta name="twitter:card" content="summary" />
+<meta property="og:image" content="https://calm-ay.github.io/img/og-card.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Rasaq Ayomide — 0xC4LM4Y — Penetration Tester & Security Researcher" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://calm-ay.github.io/img/og-card.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -50,6 +55,17 @@ body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;back
 @keyframes scanline{0%{top:-10%}100%{top:110%}}
 @keyframes revealline{0%{transform:scaleY(0)}100%{transform:scaleY(1)}}
 .cursor{display:inline-block;width:9px;height:1em;background:var(--accent);vertical-align:text-bottom;margin-left:3px;animation:blink 1s steps(1) infinite;box-shadow:0 0 8px var(--accent)}
+/* cursor spotlight glow */
+#cursorGlow{position:fixed;top:0;left:0;width:420px;height:420px;margin:-210px 0 0 -210px;border-radius:50%;pointer-events:none;z-index:60;background:radial-gradient(circle,rgba(0,212,170,.20),rgba(0,212,170,.06) 42%,transparent 70%);mix-blend-mode:screen;opacity:0;transition:opacity .4s ease;will-change:transform}
+#cursorGlow.on{opacity:1}
+@media (hover:none),(pointer:coarse){#cursorGlow{display:none}}
+/* scroll descent rail */
+#scrollrail{position:fixed;top:0;right:0;bottom:0;width:2px;z-index:80;background:linear-gradient(var(--border-1),rgba(27,40,48,.15));pointer-events:none}
+#scrollrail .sfill{position:absolute;top:0;left:0;right:0;height:0;background:linear-gradient(var(--accent-strong),var(--accent));box-shadow:0 0 10px rgba(0,212,170,.6)}
+#scrollrail .sdot{position:absolute;right:-3px;top:0;width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+#scrolldepth{position:fixed;right:16px;bottom:18px;z-index:80;font-size:10px;letter-spacing:.16em;color:var(--fg-4);text-transform:uppercase;pointer-events:none;text-align:right;line-height:1.5}
+#scrolldepth b{color:var(--accent);font-family:var(--display);font-size:1rem;display:block;letter-spacing:.06em}
+@media(max-width:640px){#scrolldepth{display:none}#scrollrail{width:2px}}
 
 /* ---------- RETICLE (corner brackets) ---------- */
 .reticle{position:relative}
@@ -362,6 +378,9 @@ footer.foot .egg{color:var(--fg-4);font-size:11px;margin-top:10px}
 </style>
 </head>
 <body>
+<div id="cursorGlow" aria-hidden="true"></div>
+<div id="scrollrail" aria-hidden="true"><span class="sfill"></span><span class="sdot"></span></div>
+<div id="scrolldepth" aria-hidden="true">descent<b id="depthval">0000m</b></div>
 
 <!-- ===== BOOT ===== -->
 <div id="boot">
@@ -630,6 +649,20 @@ footer.foot .egg{color:var(--fg-4);font-size:11px;margin-top:10px}
   var player=$('#player'),playBtn=$('#playBtn'),playIcon=$('#playIcon'),chev=$('#playChev'),playing=false;
   if(playBtn)playBtn.addEventListener('click',function(){playing=!playing;player.classList.toggle('paused',!playing);playIcon.innerHTML=playing?'<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>':'<polygon points="6 4 20 12 6 20 6 4"/>';playBtn.setAttribute('aria-label',playing?'Pause':'Play');});
   if(chev)chev.addEventListener('click',function(){player.classList.toggle('min');});
+
+  /* CURSOR SPOTLIGHT GLOW */
+  var glow=$('#cursorGlow');
+  if(glow&&window.matchMedia&&matchMedia('(hover:hover) and (pointer:fine)').matches){
+    var gx=window.innerWidth/2,gy=window.innerHeight/2,tx=gx,ty=gy,raf;
+    window.addEventListener('mousemove',function(e){tx=e.clientX;ty=e.clientY;glow.classList.add('on');if(!raf)raf=requestAnimationFrame(follow);},{passive:true});
+    window.addEventListener('mouseout',function(e){if(!e.relatedTarget)glow.classList.remove('on');});
+    function follow(){gx+=(tx-gx)*0.18;gy+=(ty-gy)*0.18;glow.style.transform='translate('+gx+'px,'+gy+'px)';if(Math.abs(tx-gx)>0.5||Math.abs(ty-gy)>0.5){raf=requestAnimationFrame(follow);}else{raf=null;}}
+  }
+
+  /* SCROLL DESCENT RAIL + DEPTH */
+  var sfill=$('#scrollrail .sfill'),sdot=$('#scrollrail .sdot'),depthEl=$('#depthval'),sraf;
+  function onScroll(){if(sraf)return;sraf=requestAnimationFrame(function(){sraf=null;var h=document.documentElement.scrollHeight-window.innerHeight;var pct=h>0?Math.min(1,Math.max(0,window.scrollY/h)):0;if(sfill)sfill.style.height=(pct*100)+'%';if(sdot)sdot.style.top=(pct*100)+'%';if(depthEl)depthEl.textContent=('0000'+Math.round(pct*9999)).slice(-4)+'m';});}
+  window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll,{passive:true});onScroll();
 
   /* SCROLLSPY + REVEAL + TIMELINE */
   var links={};$$('a',nl).forEach(function(a){links[a.getAttribute('href').slice(1)]=a;});
