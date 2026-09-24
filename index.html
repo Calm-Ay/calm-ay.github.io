@@ -66,6 +66,16 @@ body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;back
 #scrolldepth{position:fixed;right:16px;bottom:18px;z-index:80;font-size:10px;letter-spacing:.16em;color:var(--fg-4);text-transform:uppercase;pointer-events:none;text-align:right;line-height:1.5}
 #scrolldepth b{color:var(--accent);font-family:var(--display);font-size:1rem;display:block;letter-spacing:.06em}
 @media(max-width:640px){#scrolldepth{display:none}#scrollrail{width:2px}}
+/* particle field + text scramble */
+.particles{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.95}
+.hero-name .name-text{position:relative;z-index:2}
+.hero-name.scrambling .gl{opacity:0!important}
+.scr{color:var(--accent)}
+.sec-head h2 .scr,.tl-role .scr{color:var(--accent)}
+.boot-log{padding:6px 26px 0;font-size:11px;line-height:1.9;color:var(--fg-3)}
+.boot-log .ln{opacity:0;animation:fadeInUp .35s ease forwards}
+.boot-log .ln:nth-child(1){animation-delay:.1s}.boot-log .ln:nth-child(2){animation-delay:.3s}.boot-log .ln:nth-child(3){animation-delay:.5s}.boot-log .ln:nth-child(4){animation-delay:.7s}.boot-log .ln:nth-child(5){animation-delay:.9s}.boot-log .ln:nth-child(6){animation-delay:1.1s}
+.boot-log .ok{color:var(--accent)}.boot-log .dim{color:var(--fg-4)}
 
 /* ---------- RETICLE (corner brackets) ---------- */
 .reticle{position:relative}
@@ -134,7 +144,7 @@ section{max-width:var(--maxw);margin:0 auto;padding:96px 20px;scroll-margin-top:
 /* ---------- HERO ---------- */
 #hero{max-width:var(--maxw);margin:0 auto;min-height:100vh;position:relative;display:flex;flex-direction:column;justify-content:center;padding:120px 20px 92px;overflow:hidden}
 .hero-grid{position:absolute;inset:0;z-index:0;background-image:linear-gradient(var(--border-0) 1px,transparent 1px),linear-gradient(90deg,var(--border-0) 1px,transparent 1px);background-size:52px 52px;-webkit-mask-image:radial-gradient(ellipse 70% 60% at 45% 45%,#000,transparent 90%);mask-image:radial-gradient(ellipse 70% 60% at 45% 45%,#000,transparent 90%);opacity:.5}
-.orbit{position:absolute;z-index:1;top:44%;left:47%;width:min(1080px,128vw);height:600px;transform:translate(-50%,-50%);pointer-events:none;opacity:.9}
+.orbit{position:absolute;z-index:2;top:44%;left:47%;width:min(1080px,128vw);height:600px;transform:translate(-50%,-50%);pointer-events:none;opacity:.9}
 .orbit svg{width:100%;height:100%;overflow:visible;display:block}
 .orbit .flow{animation:orbitflow 2.6s linear infinite}
 @keyframes orbitflow{to{stroke-dashoffset:-110}}
@@ -385,6 +395,14 @@ footer.foot .egg{color:var(--fg-4);font-size:11px;margin-top:10px}
 <!-- ===== BOOT ===== -->
 <div id="boot">
   <div class="boot-top"><span class="op">OP-01 / 0xC4LM4Y</span><span>6.52&deg;N 3.37&deg;E</span></div>
+  <div class="boot-log">
+    <div class="ln">[ <span class="ok">ok</span> ] mounting <span class="dim">/dev/curiosity</span></div>
+    <div class="ln">[ <span class="ok">ok</span> ] loading toolkit: web &middot; api &middot; active directory &middot; cloud &middot; mobile</div>
+    <div class="ln">[ <span class="ok">ok</span> ] handshake: lagos &rarr; 0.0.0.0 <span class="dim">(^_^)/</span></div>
+    <div class="ln">[ <span class="ok">ok</span> ] calibrating orbit: 9 rings, 1 handle</div>
+    <div class="ln">[ <span class="ok">ok</span> ] queuing soundtrack: focus &mdash; deep work</div>
+    <div class="ln">[ <span class="ok">..</span> ] decrypting identity: rasaq ayomide</div>
+  </div>
   <div class="boot-mid">
     <div class="scanner">
       <div class="frame reticle"><span class="rtl"></span><span class="rtr"></span>
@@ -396,7 +414,7 @@ footer.foot .egg{color:var(--fg-4);font-size:11px;margin-top:10px}
     </div>
   </div>
   <div class="boot-bot">
-    <div class="boot-glitch">0xC4LM4Y<span class="ga" aria-hidden="true">0xC4LM4Y</span><span class="gb" aria-hidden="true">0xC4LM4Y</span></div>
+    <div class="boot-glitch"><span id="bootName" data-final="0xC4LM4Y">0xC4LM4Y</span><span class="ga" aria-hidden="true">0xC4LM4Y</span><span class="gb" aria-hidden="true">0xC4LM4Y</span></div>
     <div class="boot-sub">Rasaq Ayomide &mdash; corner of the terminal<span class="cursor"></span></div>
     <div class="skiprow"><span>press <b>any key</b> / <b>tap</b> to skip</span><span class="track"><span class="fill" id="bootfill"></span></span><span class="pct" id="bootpct">000%</span></div>
   </div>
@@ -435,6 +453,7 @@ footer.foot .egg{color:var(--fg-4);font-size:11px;margin-top:10px}
   <!-- ===== HERO ===== -->
   <section id="hero">
     <div class="hero-grid"></div>
+    <canvas class="particles" id="particles" aria-hidden="true"></canvas>
     <div class="orbit" aria-hidden="true">
       <svg viewBox="0 0 900 560">
         <defs>
@@ -457,7 +476,7 @@ footer.foot .egg{color:var(--fg-4);font-size:11px;margin-top:10px}
     <div class="depth">surface<br><b>0000</b>m<br>depth</div>
     <div class="hero-inner">
       <div class="hero-loc">Rasaq Ayomide <span class="dot">&middot;</span> Lagos, NG</div>
-      <div class="hero-name reticle">0xC4LM4Y<span class="rtl"></span><span class="rtr"></span><span class="gl a" aria-hidden="true">0xC4LM4Y</span><span class="gl b" aria-hidden="true">0xC4LM4Y</span></div>
+      <div class="hero-name reticle"><span class="name-text" id="nameText" data-final="0xC4LM4Y">0xC4LM4Y</span><span class="rtl"></span><span class="rtr"></span><span class="gl a" aria-hidden="true">0xC4LM4Y</span><span class="gl b" aria-hidden="true">0xC4LM4Y</span></div>
       <div class="hero-role"><span class="sl">//</span> <span id="typed"></span><span class="cursor"></span></div>
       <p class="hero-desc">I test <b>web, API, Active Directory, cloud and mobile</b> environments, turn attack
       paths into clear evidence, and help teams fix the risks that matter &mdash; ethically and methodically.</p>
@@ -621,6 +640,46 @@ footer.foot .egg{color:var(--fg-4);font-size:11px;margin-top:10px}
   "use strict";
   var $=function(s,c){return (c||document).querySelector(s);};
   var $$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));};
+  var reduceMotion=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  /* TEXT SCRAMBLE / DECODE (time-based — always resolves) */
+  var SCR_CHARS='!<>-_\\/[]{}=+*^?#0123456789ABCDEFxX$&%';
+  function scramble(el,text,dur){
+    if(!el)return Promise.resolve();
+    if(reduceMotion){el.textContent=text;return Promise.resolve();}
+    dur=dur||1100;
+    var len=text.length,slots=[],i;
+    for(i=0;i<len;i++){var s=Math.random()*0.45;slots.push({to:text[i],s:s,e:Math.min(1,s+0.3+Math.random()*0.4),c:null});}
+    var start=null;
+    return new Promise(function(resolve){
+      function frame(now){
+        if(start===null)start=now;
+        var t=Math.min(1,(now-start)/dur),out='',done=0,j;
+        for(j=0;j<slots.length;j++){var q=slots[j];
+          if(t>=q.e){out+=q.to;done++;}
+          else{if(!q.c||Math.random()<0.32)q.c=SCR_CHARS.charAt(Math.floor(Math.random()*SCR_CHARS.length));out+='<span class="scr">'+q.c+'</span>';}
+        }
+        el.innerHTML=out;
+        if(done>=slots.length||t>=1){el.textContent=text;resolve();}
+        else requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    });
+  }
+
+  /* PARTICLE FIELD (hero background) */
+  (function(){
+    var cv=$('#particles');if(!cv||reduceMotion)return;
+    var ctx=cv.getContext('2d'),W=0,H=0,parts=[],raf=null,t=0,DPR=Math.min(2,window.devicePixelRatio||1);
+    var cols=['0,212,170','255,178,36','230,242,238','92,180,255'];
+    function size(){var r=cv.getBoundingClientRect();W=cv.width=Math.max(1,Math.round(r.width*DPR));H=cv.height=Math.max(1,Math.round(r.height*DPR));}
+    function init(){parts=[];var n=Math.min(95,Math.max(30,Math.round((W*H)/(DPR*DPR*13000))));for(var i=0;i<n;i++){parts.push({x:Math.random()*W,y:Math.random()*H,r:(Math.random()*1.5+0.4)*DPR,vx:(Math.random()-0.5)*0.14*DPR,vy:(Math.random()-0.5)*0.14*DPR,a:Math.random()*0.55+0.18,tw:Math.random()*0.02+0.004,ph:Math.random()*6.28,c:cols[Math.floor(Math.random()*cols.length)]});}}
+    function draw(){t++;ctx.clearRect(0,0,W,H);for(var i=0;i<parts.length;i++){var p=parts[i];p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x+=W;else if(p.x>W)p.x-=W;if(p.y<0)p.y+=H;else if(p.y>H)p.y-=H;var al=(p.a*(0.5+0.5*Math.sin(t*p.tw+p.ph))).toFixed(3);ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.283);ctx.fillStyle='rgba('+p.c+','+al+')';ctx.fill();}raf=requestAnimationFrame(draw);}
+    size();init();draw();
+    var to;window.addEventListener('resize',function(){clearTimeout(to);to=setTimeout(function(){size();init();},200);},{passive:true});
+    var hero=$('#hero');
+    if('IntersectionObserver' in window&&hero){new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){if(!raf)draw();}else if(raf){cancelAnimationFrame(raf);raf=null;}});},{threshold:0}).observe(hero);}
+  })();
 
   /* BOOT */
   var boot=$('#boot'),bfill=$('#bootfill'),bpct=$('#bootpct'),finished=false,p=0;
@@ -628,6 +687,7 @@ footer.foot .egg{color:var(--fg-4);font-size:11px;margin-top:10px}
   function endBoot(){if(finished)return;finished=true;if(boot){boot.classList.add('done');setTimeout(function(){if(boot.parentNode)boot.parentNode.removeChild(boot);},700);}startTyping();}
   ['keydown','click','touchstart'].forEach(function(ev){window.addEventListener(ev,function(){endBoot();},{once:true,passive:true});});
   setTimeout(endBoot,5200);
+  var bn=$('#bootName');if(bn)setTimeout(function(){scramble(bn,bn.getAttribute('data-final'));},250);
 
   /* CLOCK (WAT = UTC+1) */
   var clk=$('#clock');
@@ -637,7 +697,12 @@ footer.foot .egg{color:var(--fg-4);font-size:11px;margin-top:10px}
   /* HERO TYPING */
   var roles=['penetration tester & security researcher','appsec & endpoint security','active directory red teamer','api & web security','bug bounty hunter'];
   var typedEl=$('#typed'),ri=0,ci=0,del=false,started=false;
-  function startTyping(){if(started)return;started=true;typeLoop();}
+  function startTyping(){if(started)return;started=true;
+    var nameEl=$('#nameText');
+    if(nameEl){var hn=nameEl.parentNode;if(hn&&hn.classList)hn.classList.add('scrambling');
+      var pr=scramble(nameEl,nameEl.getAttribute('data-final')||nameEl.textContent);
+      if(pr&&pr.then){pr.then(function(){if(hn&&hn.classList)hn.classList.remove('scrambling');});}else if(hn&&hn.classList){hn.classList.remove('scrambling');}}
+    typeLoop();}
   function typeLoop(){if(!typedEl)return;var w=roles[ri];if(!del){typedEl.textContent=w.slice(0,++ci);if(ci===w.length){del=true;return setTimeout(typeLoop,1700);}}else{typedEl.textContent=w.slice(0,--ci);if(ci===0){del=false;ri=(ri+1)%roles.length;}}setTimeout(typeLoop,del?38:72);}
 
   /* MENU */
@@ -669,7 +734,7 @@ footer.foot .egg{color:var(--fg-4);font-size:11px;margin-top:10px}
   if('IntersectionObserver' in window){
     var spy=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var id=e.target.id==='hero'?'whoami':e.target.id;for(var k in links)links[k].classList.remove('active');if(links[id])links[id].classList.add('active');}});},{rootMargin:'-45% 0px -50% 0px'});
     $$('main section[id]').forEach(function(s){spy.observe(s);});
-    var rev=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');rev.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});
+    var rev=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');var h=e.target.querySelector?e.target.querySelector('h2'):null;if(h&&!h.getAttribute('data-scr')){h.setAttribute('data-scr','1');scramble(h,h.textContent);}rev.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});
     $$('.reveal').forEach(function(el){rev.observe(el);});
     var tl=$('#timeline');if(tl){var tio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');tio.unobserve(e.target);}});},{rootMargin:'0px 0px -20% 0px'});tio.observe(tl);}
   }else{$$('.reveal').forEach(function(el){el.classList.add('in');});var t=$('#timeline');if(t)t.classList.add('in');}
